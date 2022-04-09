@@ -3,6 +3,7 @@ import { DndProvider, DropTargetMonitor, useDrop } from "react-dnd";
 import update from 'immutability-helper';
 import { PageCard } from "./page-card/page-card";
 import { Page } from "../../models/Page";
+import './page-sorter.css'
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { updateAllPages } from "../../services/catalog-service";
 
@@ -28,6 +29,8 @@ export const PageSorter: FC<PageSorterProperties> = ({pages, setPages}) => {
         rowGap: '10px',
         cursor: 'default',
         zIndex: 100,
+        overflow: 'scroll',
+        maxHeight: '80%',
     }
 
     const moveCard = useCallback((dragIndex, hoverIndex) => {

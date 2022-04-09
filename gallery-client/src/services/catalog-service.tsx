@@ -3,7 +3,7 @@ import { GalleryItemInfo } from "../models/GalleryItem";
 import { Page } from "../models/Page";
 import { Properties } from "../models/Properties";
 
-export const url = 'https://localhost/CatalogApi/';
+export const url = 'https://127.0.0.1/CatalogApi/';
 
 const fetchCatalog = async () => {
     const headers = new Headers();
@@ -52,6 +52,13 @@ export function uploadImage(formData: FormData) {
     headers.append('Content-Type', 'multipart/form-data');
     const request = axios.create({ baseURL: url, headers });
     request.post("Images/UploadImage", formData);
+}
+
+export function changeImage(formData: FormData, uuid: string) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'multipart/form-data');
+    const request = axios.create({ baseURL: url, headers });
+    request.post("Images/ChangeImage", formData);
 }
 
 export async function insertNewCatalogItem(item: GalleryItemInfo) {

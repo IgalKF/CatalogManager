@@ -37,7 +37,7 @@ const GalleryPageGrid: FunctionComponent<GalleryPageGridProps> = ({ dragEnter, s
         direction: 'rtl',
         margin: '3% 10px 35px 10px',
         display: dragEnter ? 'none' : 'grid',
-        gap: '10px 5px',
+        gap: '10px 10px',
         gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
         gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
     }
@@ -77,6 +77,7 @@ const GalleryPageGrid: FunctionComponent<GalleryPageGridProps> = ({ dragEnter, s
 
     const refreshGridItems = async () => {
         if (pageIndex) {
+            console.log('refresh');
             const response = await fetchPageItems(pageIndex);
             setItems(
                 response.data

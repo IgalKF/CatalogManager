@@ -50,5 +50,33 @@ namespace Gallery.Api.Gateway.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        public async Task ChangeImage([FromForm] IFormFile file)
+        {
+            try
+            {
+                if (file.Length > 0)
+                {
+                    string[] splittedFile = file.FileName.Split('.');
+
+                    if(splittedFile.Length != 2)
+                    {
+                        throw new BadHttpRequestException("Wrong file name");
+                    }
+
+                    Directory.CreateDirectory("Media");
+
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "Media", $"{splittedFile[0]}.{splittedFile[1]}");
+                    using Stream fileStream = new FileStream(filePath, FileMode.Create);
+                    await file.CopyToAsync(fileStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "Failed uploading the requested image..");
+                throw;
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ export interface GalleryItemDescriptionProps {
     setItems: React.Dispatch<React.SetStateAction<GalleryItemInfo[]>>;
     setDraggable: React.Dispatch<React.SetStateAction<boolean>>,
     index: number,
+    willPrint: boolean,
 }
 
 const useFocus = () => {
@@ -17,7 +18,7 @@ const useFocus = () => {
 	return [ htmlElRef,  setFocus ] 
 }
 
-const GalleryItemDescription: FunctionComponent<GalleryItemDescriptionProps> = ({ item, setDraggable, index, items, setItems }) => {
+const GalleryItemDescription: FunctionComponent<GalleryItemDescriptionProps> = ({ item, setDraggable, index, items, setItems, willPrint }) => {
 
     const [isInputs, setIsInputs] = useState(false);
     const [inputRef, setInputFocus] = useFocus();
@@ -75,7 +76,7 @@ const GalleryItemDescription: FunctionComponent<GalleryItemDescriptionProps> = (
 
     return (
         <div style={contentStyle} onDoubleClick={changeInputState}>
-            {isInputs
+            {isInputs && !willPrint
                 ? (<div><input ref={inputRef} onKeyUp={end} type='text' value={item.title} onChange={handleTitleChange} /><br />
                     <input onKeyUp={end} type='text' value={item.subTitle} onChange={handleSubTitleChange} /><br />
                     <input onKeyUp={end} type='text' value={item.code} style={{ fontFamily: 'arial !important' }} onChange={handleCodeChange} /><br />

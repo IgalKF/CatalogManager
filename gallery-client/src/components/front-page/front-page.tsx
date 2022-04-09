@@ -11,13 +11,15 @@ import { FileDrop } from 'react-file-drop';
 import { v4 } from 'uuid';
 import Dropzone from 'react-dropzone';
 import { BgColors } from '../../models/Properties';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 export interface FrontPageProps {
     willPrint: boolean;
     bgColors: BgColors;
+    lastPage: boolean;
 }
 
-const FrontPage: FC<FrontPageProps> = ({ willPrint, bgColors }) => {
+const FrontPage: FC<FrontPageProps> = ({ willPrint, bgColors, lastPage }) => {
 
     const pageStyle: CSSProperties = {
         direction: 'rtl',
@@ -26,7 +28,7 @@ const FrontPage: FC<FrontPageProps> = ({ willPrint, bgColors }) => {
         background: `linear-gradient(-45deg, ${bgColors.lower} 0%, ${bgColors.higher} 100%)`,
         display: 'grid',
         padding: '15px 0 0 0',
-        height: '1107px',
+        height: '1106px',
         gridTemplateRows: '1fr 20% 1fr',
         gridTemplateColumns: '30% 1% 1fr',
         rowGap: '0px',
@@ -67,7 +69,7 @@ const FrontPage: FC<FrontPageProps> = ({ willPrint, bgColors }) => {
             </div>
             <div></div>
             <div></div>
-            <div>קטלוג מוצרים</div>
+            {lastPage ? <div style={{fontSize: '30px', margin: '20px 40px 0 0'}}>אליהו צבאן חברה בע"מ<br/>דרך יפו 30 תל-אביב-יפו<br/>טלפון: 03-6825051<br/><a style={{color: 'cyan'}} href='www.slider-il.com'>www.slider-il.com</a></div> : <div>קטלוג מוצרים</div>}
         </div>
     );
 }

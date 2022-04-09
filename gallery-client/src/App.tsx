@@ -10,9 +10,6 @@ import ColorPickerButtons from './components/color-picker/color-picker';
 import FrontPage from './components/front-page/front-page';
 import { BgColors, Properties } from './models/Properties';
 import { PageSorter } from './components/page-sorter/page-sorter';
-import { PDFDownloadLink, Document, Page as Pg } from '@react-pdf/renderer'
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -21,6 +18,7 @@ function App() {
   const [addPageForm, setAddPageForm] = useState(false);
   const [pages, setPages] = useState<Array<Page>>([]);
   const [willPrint, setWillPrint] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [bgColors, setBgColors] = useState<BgColors>({ higher: '#eee', lower: '#ccc', title: '#eee' });
   const [properties, setProperties] = useState<Properties>({ Id: 1, bgColors: { higher: '#eee', lower: '#ccc', title: '#eee' }, askBeforeItemRemoval: true });
 
@@ -32,6 +30,14 @@ function App() {
     const newPages = [...pages];
     newPages.push({ items: [], pageTitle: formData.values().next().value, pageIndex: pages.length + 1, initialIndex: pages.length + 1 })
     setPages(newPages);
+  }
+
+  const loadingStyle: CSSProperties = {
+    position: 'fixed',
+    top: 10,
+    border: 'none',
+    fontSize: '50px',
+    color: 'white'
   }
 
   const addPageButtonStyle: CSSProperties = {
@@ -81,13 +87,15 @@ function App() {
 
   useEffect(() => {
     if (willPrint) {
+      setLoading(true);
       setTimeout(() => {
+        setLoading(false);
         window.print();
-      }, 10);
+      }, 1000);
 
       setTimeout(() => {
         setWillPrint(false);
-      }, 100)
+      }, 2000)
     }
   }, [willPrint]);
 
@@ -114,9 +122,10 @@ function App() {
 
   return (
     <div id="app" className="App">
+      {loading ? <h1 style={loadingStyle}>טוען...</h1>: null}
       <header className="App-header">
       <DndProvider backend={HTML5Backend}>
-        <FrontPage bgColors={bgColors} willPrint={willPrint} />
+        <FrontPage lastPage={false} bgColors={bgColors} willPrint={willPrint} />
         {getPages}
         {willPrint ? null : <PageSorter pages={pages} setPages={setPages} />}
         {willPrint ? null : <ColorPickerButtons properties={properties} setBgColors={setBgColors} />}
@@ -125,6 +134,7 @@ function App() {
           <input style={pageAdditionInputStyle} name='title' type='text' />
         </form>
         {willPrint ? null : <button style={buttonStyle} onClick={printPdf}>PDF</button>}
+        <FrontPage lastPage={true} bgColors={bgColors} willPrint={willPrint} />
       </DndProvider>
       </header>
     </div>
