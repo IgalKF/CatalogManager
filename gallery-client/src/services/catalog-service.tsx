@@ -3,7 +3,7 @@ import { GalleryItemInfo } from "../models/GalleryItem";
 import { Page } from "../models/Page";
 import { Properties } from "../models/Properties";
 
-export const url = 'https://localhost/CatalogApi/';
+export const url = 'https://localhost:44328/';
 
 const fetchCatalog = async () => {
     const headers = new Headers();
