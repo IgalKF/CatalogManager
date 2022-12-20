@@ -44,10 +44,7 @@ const GalleryPageTitle: FC<GalleryPageTitleProps> = ({ title, bgColor, pages, se
     };
 
     const imageStyle: CSSProperties = {
-        position:'absolute',
         width: '100%',
-        top: 0,
-        left: 0,
         paddingTop: '13px',
         boxShadow: '-5px 10px 10px 10px rgba(0, 0, 0, 0.4)',
     };

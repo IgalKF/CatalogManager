@@ -16,6 +16,7 @@ const ItemTypes = {
 export const PageCard: FC<PageSorterProperties> = ({ page, moveCard, index }) => {
 
     const sortBlockStyle: CSSProperties = {
+        fontSize: '40%',
         backgroundColor: 'white',
         padding: '5px 10px',
         borderRadius: '5px',

@@ -1,13 +1,12 @@
 import fetchCatalog, { fetchPageItems, insertNewCatalogItem, updateAllPages, uploadImage } from '../../services/catalog-service';
 import ItemUploader from '../../components/item-uploader/item-uploader';
 import GalleryItem from '../../components/gallery-item/gallery-item';
-import React, { FC, MouseEvent, useEffect, useState } from 'react';
+import React, { FC, MouseEvent, useEffect, useState, CSSProperties } from 'react';
 import { GalleryItemInfo } from '../../models/GalleryItem';
 import GalleryPageGrid from './gallery-page-grid/GalleryPageGrid';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Page } from '../../models/Page';
-import { CSSProperties } from 'react';
 import GalleryPageTitle from './gallery-page-title/gallery-page-title';
 import { FileDrop } from 'react-file-drop';
 import { v4 } from 'uuid';
@@ -53,15 +52,14 @@ const GalleryPage: FC<GalleryPageProps> = ({ data, willPrint, bgColors, pages, s
         position: 'relative',
         direction: 'rtl',
         textAlign: 'center',
-        WebkitPrintColorAdjust: 'exact',
-        pageBreakAfter: 'always',
         background: `linear-gradient(-45deg, ${bgColors.lower} 0%, ${bgColors.higher} 100%)`,
         display: 'grid',
         padding: '15px 0 0 0',
-        height: '1107px',
+        height: 'calc(297mm - 15.52px)',
         gridTemplateRows: 'min-content auto 10px',
         rowGap: '0px',
         width: willPrint ? '100%' : '210mm',
+        pageBreakAfter:'always',
 
         // File drag style:
         border: dragEnter ? '10px dashed green' : 'none',
@@ -130,7 +128,6 @@ const GalleryPage: FC<GalleryPageProps> = ({ data, willPrint, bgColors, pages, s
             setSplittedPages([{...data, items: items}]);
         }
     }, [pages, items]);
-
     return (
         <div>
             <Dropzone

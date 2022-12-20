@@ -7,5 +7,5 @@ export interface GalleryItemInfo {
     subTitle: string;
     code: string;
     barCode: string;
-    stock: 'out' | 'soon' | 'back' | '';
+    stock: 'out' | 'temp' | 'soon' | 'back' | '';
 }
