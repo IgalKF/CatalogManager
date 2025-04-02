@@ -53,7 +53,7 @@ const GalleryItem: FunctionComponent<GalleryItemProps> = ({ dragEnter, id, subPa
         //console.log(`${url}Media/${item.imageId}.${item.imageExt}`);
     }
 
-    const [{ handlerId }, drop] = useDrop({
+    const [handlerId, drop] = useDrop<DragItem>({
         accept: ItemTypes.CARD,
         collect(monitor) {
             return {
@@ -266,7 +266,6 @@ const GalleryItem: FunctionComponent<GalleryItemProps> = ({ dragEnter, id, subPa
                     "file",
                     file.selectedFile,
                     `${item.imageId}.${fileExt}`
-
                 );
                 changeImage(formData, item.imageId);
                 setImageSrc(imageSrc + 1);
@@ -294,7 +293,7 @@ const GalleryItem: FunctionComponent<GalleryItemProps> = ({ dragEnter, id, subPa
             <div style={{ zIndex: 11, position: 'relative' }}>
                 <GalleryItemDescription willPrint={willPrint} setDraggable={setDraggable} setItems={setItems} items={items} item={item} index={subPagedItemIndex} />
             </div>
-            <div role="Handle" ref={drag} />
+            <div role="Handle" />
         </div >);
 }
 

@@ -25,10 +25,10 @@ function App() {
   const AddPage = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    createPage({ items: [], pageTitle: formData.values().next().value });
+    createPage({ items: [], pageTitle: formData.values().next().value as string });
     setAddPageForm(false);
     const newPages = [...pages];
-    newPages.push({ items: [], pageTitle: formData.values().next().value, pageIndex: pages.length + 1, initialIndex: pages.length + 1 })
+    newPages.push({ items: [], pageTitle: formData.values().next().value as string, pageIndex: pages.length + 1, initialIndex: pages.length + 1 })
     setPages(newPages);
   }
 
@@ -122,7 +122,7 @@ function App() {
 
   return (
     <div id="app" className="App">
-      {loading ? <h1 style={loadingStyle}>טוען...</h1>: null}
+      {/* {loading ? <h1 style={loadingStyle}>טוען...</h1>: null} */}
       <header className="App-header">
       <DndProvider backend={HTML5Backend}>
         <FrontPage lastPage={false} bgColors={bgColors} willPrint={willPrint} />

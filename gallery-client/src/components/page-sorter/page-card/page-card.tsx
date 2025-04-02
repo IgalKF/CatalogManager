@@ -1,5 +1,4 @@
-import { NoInfer } from "@reduxjs/toolkit/dist/tsHelpers";
-import { CSSProperties, FC, useCallback, useRef } from "react";
+import { CSSProperties, FC, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { Page } from "../../../models/Page";
 
@@ -61,7 +60,7 @@ export const PageCard: FC<PageSorterProperties> = ({ page, moveCard, index }) =>
         },
     });
 
-    const [{ isDragging }, drag] = useDrag({
+    const [{ isDragging }, drag, preview] = useDrag({
         type: ItemTypes.CARD,
         item: () => {
             return { id: index, index };
@@ -76,7 +75,7 @@ export const PageCard: FC<PageSorterProperties> = ({ page, moveCard, index }) =>
 
     return (
         <div data-handler-id={handlerId} ref={ref} style={sortBlockStyle}>{page.initialIndex}. {page.pageTitle}
-            <div role="Handle" ref={drag} />
+            <div role="Handle" />
         </div>
     );
 }

@@ -1,16 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { Provider } from 'react-redux';
-import reportWebVitals from './reportWebVitals';
-import { PDFDownloadLink, Document, Page as Pg } from '@react-pdf/renderer'
+import React from "react";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.render( 
-    <React.StrictMode>
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
+  <React.StrictMode>
     <App />
-    </ React.StrictMode>
-    , document.getElementById('root')
+  </React.StrictMode>
 );
 
 reportWebVitals();

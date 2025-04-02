@@ -33,7 +33,7 @@ export const PageSorter: FC<PageSorterProperties> = ({pages, setPages}) => {
         maxHeight: '80%',
     }
 
-    const moveCard = useCallback((dragIndex, hoverIndex) => {
+    const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
         const dragCard = pages[dragIndex];
         const sortedPages = update(pages, {
             $splice: [

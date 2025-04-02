@@ -16,6 +16,8 @@ namespace Gallery.Api.Gateway.Models
         public string ImageExt { get; set; }
         public string SubTitle { get; set; }
         public string Stock { get; set; }
+
+        [BsonGuidRepresentation(GuidRepresentation.Standard)]
         public Guid ImageId { get; set; }
     }
 }

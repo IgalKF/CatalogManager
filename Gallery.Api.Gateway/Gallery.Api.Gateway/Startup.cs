@@ -46,10 +46,12 @@ namespace Gallery.Api.Gateway
                 .SetIsOriginAllowed(origin => true) // allow any origin
                 .AllowCredentials());
 
+            Directory.CreateDirectory("Media");
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-            Path.Combine(env.ContentRootPath, "Media")),
+                Path.Combine(env.ContentRootPath, "Media")),
                 RequestPath = "/Media"
             });
 
